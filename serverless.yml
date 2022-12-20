@@ -1,0 +1,21 @@
+service: trello-helper
+
+plugins:
+  - serverless-plugin-optimize
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  profile: default
+  region: eu-central-1
+  lambdaHashingVersion: 20201221
+
+functions:
+  trello-helper: # The name of the lambda function
+    # The module 'handler' is exported in the file 'src/lambda'
+    handler: dist/lambda.handler
+    events:
+      - http:
+          method: any
+          path: /{any+}
