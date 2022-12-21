@@ -15,10 +15,16 @@ export class AppService {
     this.trello.setOauthToken(this.configService.get('TOKEN'));
   }
 
-  async updateCard({ card, list, board }) {
+  async updateCard({ card, list }) {
     await this.trello.card.update(card.id, {
       idMembers: [this.configService.get('MEMBER')],
       due: this.getDue(),
+      start: (new Date()).toString(),
+      subscribed: true,
+      dueReminder: 1440,
+      idLabels: [
+        "63453e82596756259cf4dcb1"
+      ],
       idList: list.id
     })
   }
